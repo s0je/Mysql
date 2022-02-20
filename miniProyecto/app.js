@@ -1,6 +1,7 @@
 let express = require("express");
-const router = express.Router();
 let mysql = require("mysql2");
+let app = express();
+let cors = require('cors')
 
 let connection = mysql.createConnection(
     {
@@ -18,19 +19,30 @@ connection.connect(function(error){
     }
 });
 
-/////////GET usuarios
+app.use(cors());
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
-router.get("/", 
+/////////GET Alumnos
+app.get("/alumnos", 
         function(request, response)
         {
             let id =  request.query.id;
-            let params = [id]
+            let indice = document.getElementById("indice").value;
+            let params = []
             let sql;
-            if (request.query.id == null)
+            if (request.query.id == null && indice == '')
                 sql = "SELECT * FROM students";
-            else
+            else if(indice !='')
+            {
+                params = [indice];
                 sql = "SELECT * FROM students WHERE student_id= ?";
-
+            }
+            else
+            {
+                params = [id]
+                sql = "SELECT * FROM students WHERE student_id= ?";
+            }
                 connection.query(sql,[params], function (err, result) 
                 {
                     if (err) 
@@ -45,7 +57,7 @@ router.get("/",
 
 //////POST Alumnos
 
-router.post("/", 
+app.post("/alumnos", 
         function(request, response)
         {
             let nombre = request.body.name;
@@ -77,7 +89,7 @@ router.post("/",
 
 ////// PUT Alumnos
 
-router.put("/", 
+app.put("/alumnos", 
         function(request, response)
         {
             console.log(request.body)
@@ -104,7 +116,7 @@ router.put("/",
 
 /////// DELETE Alumno
 
-router.delete("/",
+app.delete("/alumnos",
             function(request,response)
             {
                 console.log(request.body);
@@ -123,4 +135,12 @@ router.delete("/",
             }
 );
 
-module.exports = router;
+
+////////ERROR 404
+app.use(function(req,res,next)
+        {
+            respuesta = {error: true, codigo: 404, mensaje: 'URL no encontrada'};
+            res.status(404).send(respuesta);
+        })
+
+app.listen(3000);

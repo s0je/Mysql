@@ -11,9 +11,11 @@ body{
 }
 .pizarra{
     width: 100%;
-    margin-top: 10a0px;
+    height: 400px;
+    max-height: 700px;
+    margin-top: 30px;
     padding: 5px;
-    border: 10px solid brown;
+    border: 10px solid #804000;
     border-radius: 10px;
     background-color: green;
     box-shadow: 8px 8px;
