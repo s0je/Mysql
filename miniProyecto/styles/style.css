@@ -11,23 +11,15 @@ body{
 }
 .pizarra{
     width: 80%;
-    margin-top: 50px;
+    margin-top: 100px;
     height: 300px;
     padding: 5px;
-    border: 10px solid brown;
+    border: 10px solid #804000;
     border-radius: 10px;
     background-color: green;
     box-shadow: 100px;
     font-family: 'Crafty Girls', cursive;
     color: white;
+    text-align: center;
     
-}
-
-.bienvenido{
-    font-size: 100px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-wrap: wrap;
-    height: 100%;
 }
