@@ -20,20 +20,17 @@
         <div class="col-12 container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light container-fluid" style="background-color: #ffd90f;">
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="#">Navbar</a>
+                  <a class="navbar-brand" href="/index.html">Home</a>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+                        <a class="nav-link" aria-current="page" href="../students/students.html">Alumnos</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="../students/students.html">Alumnos</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="../marks/marks.html">Notas</a>
+                        <a class="nav-link active" href="../marks/marks.html">Notas</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="../operations/operattions.html">Operaciones</a>
@@ -44,39 +41,85 @@
             </div>
         </div>
         <div class="row w-100 p-3 " style=" padding: 0;margin: 0; ">
-            <div class="col-4" style="border: 1px solid black;">
-                <img src="/img/simpsons-edna-maestra-clavados-maestra-de-los-simpsons-elf-person-sleeve-clothing-transparent-png-725007.png" class="img-fluid" alt="Edna">            </div>
-            <div class="col-8" style="border: 1px solid black;">
-                <div class="pizarra">
-                    <table class="table" style="color: white;">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                          </tr>
-                        </tbody>
-                      </table>
+            <div class="col-4">
+                <img src="/img/lisa.png" class="img-fluid" alt="Edna">            
+            </div>
+            <div class="col-8">
+                <div class="d-grid gap-2 d-md-block" style=" margin-top: 20px; padding-left: 200px;">
+                  <button class="btn btn-warning" style="font-weight: bold;" onclick="mostrarNota()" type="button">Mostrar</button>
+                  <button class="btn btn-warning" style="font-weight: bold;" onclick="mostrarForm()" type="button">Crear</button>
+                  <button class="btn btn-warning" style="font-weight: bold;" onclick="updateForm()"type="button">Actualizar</button>
+                  <button class="btn btn-warning" style="font-weight: bold;" onclick="deleteForm()" type="button">Borrar</button>
+                </div>
+                <div id="pizarra" class="pizarra">
+                  <table id="tabla" class="table" style="color: white;">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id Alumno</th>
+                        <th scope="col">Id Asginatura</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Nota</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tBody">
+                    <!-- Datos notas -->
+                    </tbody>
+                  </table> 
+                  <form id="createForm" style="margin: 50px; visibility: hidden; display: none;">
+                    <div class="mb-3">
+                      <label for="nombre" class="form-label">Id alumno</label>
+                      <input type="text" class="form-control" id="alumno" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                      <label for="apellido" class="form-label">Id Asignatura</label>
+                      <input type="text" class="form-control" id="asignatura">
+                    </div>
+                    <div class="mb-3">
+                      <label for="grupo" class="form-label">fecha</label>
+                      <input type="date" name="trip-start" min="1990-01-01" max="2022-02-21" class="form-control" id="fecha">
+                    </div>
+                    <div class="mb-3">
+                      <label for="grupo" class="form-label">nota</label>
+                      <input type="text" class="form-control" id="nota">
+                    </div>
+                    <button type="reset" onclick="crearNota()" class="btn btn-warning">Enviar</button>
+                  </form>
+                  <form id="updateForm" style="margin: 50px; visibility: hidden; display: none;">
+                    <div class="mb-3">
+                      <label for="idUpdate" class="form-label">Id de la nota</label>
+                      <input id="idUpdate" type="text" class="form-control" aria-describedby="button-addon2">
+                    </div>
+                    <div class="mb-3">
+                      <label for="nombre" class="form-label">Id alumno</label>
+                      <input type="text" class="form-control" id="alumnoUpdate" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                      <label for="apellido" class="form-label">Id Asignatura</label>
+                      <input type="text" class="form-control" id="asignaturaUpdate">
+                    </div>
+                    <div class="mb-3">
+                      <label for="grupo" class="form-label">fecha</label>
+                      <input type="date" name="trip-start" min="1990-01-01" max="2022-02-21" class="form-control" id="fechaUpdate">
+                    </div>
+                    <div class="mb-3">
+                      <label for="grupo" class="form-label">nota</label>
+                      <input type="text" class="form-control" id="notaUpdate">
+                    </div>
+                    <button type="reset" onclick="updateNota()" class="btn btn-warning">Enivar</button>
+                  </form>
+                  <form id="deleteForm" style="margin: 50px; visibility: hidden; display: none;">
+                    <div class="mb-3">
+                      <label for="id" class="form-label">Id del Alumno</label>
+                      <input id="idDelete" type="text" class="form-control" aria-describedby="button-addon2">
+                      <button type="reset" onclick="deleteNota()" class="btn btn-warning">Enviar</button>
+                    </div>
+                  </form>
+                </div>
+                <div id="buscador" style="visibility: hidden; display:none;">
+                  <div class="input-group mb-3" style="width: 40%; margin-top: 50px; margin-left: 200px;">
+                    <input id="indice" type="text" class="form-control" placeholder="Introduzca id del alumno" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button type="reset" class="btn btn-warning" onclick="mostrarNota()">Buscar</button>
+                </div>
                 </div>
             </div>
         </div>
@@ -85,6 +128,7 @@
     <div class="container-fluid text-left p-3" style="background-color: #ffd90f;">
       <p class="small">&copy; Todos los derechos reservados</p>
   </div>
+  <script type="text/javascript"  src="index.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
